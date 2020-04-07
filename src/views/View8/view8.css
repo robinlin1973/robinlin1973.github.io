@@ -1,0 +1,19 @@
+#view8 {
+    padding: 15px 0px 0px 0px;
+    height: 300px;
+    background-color: white;
+}
+
+
+
+.raceline {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+
+.raceline:hover {
+  fill: none;
+  stroke-width: 6px;
+}

@@ -1,89 +1,116 @@
 import React, { Component } from 'react';
-import data from './data';
-import { Layout } from 'antd';
+//import { Layout,Row,Col,Tabs } from 'antd';
+import { Layout} from 'antd';
 import View1 from './views/View1';
 import View2 from './views/View2';
 import View3 from './views/View3';
-import View4 from './views/View4';
-import View5 from './views/View5';
-import View6 from './views/View6';
+//import View4 from './views/View4';
+//import View5 from './views/View5';
+//import View6 from './views/View6';
+import View7 from './views/View7';
+//import View8 from './views/View8';
 import './dashboard.css';
+import rawdata from './data/covid.csv';
+//import rawdata from 'covid.csv';
+import * as d3 from 'd3';
 
-const { Sider, Content, Footer } = Layout;
+const { Sider, Content} = Layout;
+//const {TabPane} = Tabs;
 
 export default class Dashboard extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedUser: data[0],
-            greaterThenAge: 0,
-            includedGender: ['Male', 'Female','Unknown'],
-        }
+    state = {
+        coronadata:null,
+        selectedCountry:'United States',
     }
 
-    changeSelectUser = value => {
-        this.setState({
-            selectedUser: value
-        })
+    componentDidMount(){
+
+//        //todo update domain based on the max deaths number
+        Promise.all([
+            d3.csv(rawdata)
+        ]).then( ([coronadata]) => {
+            if(coronadata){
+                this.setState({coronadata});
+            }else{
+                alert("wrong")
+            }
+        }).catch(err => alert(err))
     }
 
-    changeGreaterThenAge = value => {
-        this.setState({
-            greaterThenAge: value
-        })
-    }
-
-    changeIncludedGender = value => {
-        this.setState({
-            includedGender: value
-        })
+    handleCountryChanged=(country)=>{
+//        console.log("handleCountryChanged",country);
+        this.setState({selectedCountry: country});
     }
 
     render() {
-        const {selectedUser, greaterThenAge, includedGender} = this.state;
-        const filteredData = data.filter(user=>includedGender.indexOf(user.gender)!==-1)
-                                 .filter(user=>user.age>greaterThenAge);
+        const {coronadata} = this.state;
+
+        if(!coronadata){return null;}
+
+
         return (
             <div>
                 <Layout style={{ height: 920 }}>
-                    <Sider width={300} style={{backgroundColor:'#eee'}}>
-                        <Content style={{ height: 200 }}>
-                            <View1 user={selectedUser}/>
-                        </Content>
-                        <Content style={{ height: 300 }}>
-                            <View2 data={filteredData}/>
-                        </Content>
-                        <Content style={{ height: 400 }}>
-                            <View3 
-                                changeGreaterThenAge={this.changeGreaterThenAge}
-                                changeIncludedGender={this.changeIncludedGender}
-                            />
-                        </Content>
-                    </Sider>
                     <Layout>
-                        <Content style={{ height: 300 }}>
-                            <View4 user={selectedUser}/>
-                        </Content>
-                        <Layout style={{ height: 600 }}>
-                            <Content>
-                                <View5 data={filteredData}/>
+                        <Sider width={300} style={{backgroundColor:'#eee'}}>
+                            <Content style={{ height: 900 }}>
+                                <View1 data={coronadata} onCountryChanged={this.handleCountryChanged}/>
                             </Content>
-                            <Sider width={300} style={{backgroundColor:'#eee'}}>
-                                <View6 data={filteredData} changeSelectUser={this.changeSelectUser}/>
-                            </Sider>
+                        </Sider>
+                        <Layout style={{ height: 900 }}>
+                            <Content style={{ height: 600 }}>
+                                <View7 data={coronadata} selectedCountry={this.state.selectedCountry}/>
+                            </Content>
+                            <Content style={{ height: 300 }}>
+                                <View3 data={coronadata} selectedCountry={this.state.selectedCountry}/>
+                            </Content>
                         </Layout>
+
+                        <Sider width={400} style={{backgroundColor:'#eee'}}>
+                            <View2 data={coronadata} selectedCountry={this.state.selectedCountry}/>
+                        </Sider>
                     </Layout>
-                </Layout>
-                <Layout>
-                    <Footer style={{ height: 20 }}>
-                        <div style={{marginTop: -10}}>
-                            Source Code <a href='https://github.com/sdq/react-d3-dashboard'>https://github.com/sdq/react-d3-dashboard</a>;
-                            Author <a href='https://sdq.ai'>sdq</a>;
-                        </div>
-                    </Footer>
                 </Layout>
             </div>
         )
     }
 }
+
+//                            <Tabs  type="card">
+//
+//
+//                                <TabPane tab="World" key="1">
+//                                    <Content>
+//                                            <Row id="controlpanel" >
+//                                                <Col span={3}>
+//                                                    <div id="play"></div>
+//                                                    <div><select id="datatype">
+//                                                      <option id='datadeaths' defaultValue value="deaths">deaths</option>
+//                                                      <option value="active">active</option>
+//                                                      <option value="recovered">recovered</option>
+//                                                    </select></div>
+//                                                </Col>
+//                                                <Col span={21}><div id="dateslider"></div></Col>
+//                                            </Row>
+//                                        <View7 data={coronadata}/>
+//                                    </Content>
+//                                </TabPane>
+//
+//                                <TabPane tab="US" key="2">
+//
+//                                </TabPane>
+//
+//                                <TabPane tab="China" key="3">
+//
+//                                </TabPane>
+//
+//                            </Tabs>
+
+
+
+//                                <TabPane tab="Bubble" key="2">
+//                                    <div id="yearslider"></div>
+//                                    <div id="yearplay"></div>
+//                                    <View6 data={coronadata}/>
+//                                </TabPane>

@@ -1,0 +1,15 @@
+#view7 {
+    height: 600px;
+    background-color: white;
+}
+
+
+
+path {
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.pathcls:hover {
+  opacity: 0.5;
+}

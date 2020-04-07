@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { List } from 'antd';
 import './view6.css';
+import RaceBubble from '../../charts/RaceBubble';
 
 export default class View6 extends Component {
 
@@ -12,17 +13,11 @@ export default class View6 extends Component {
         const {data} = this.props;
         return (
             <div id='view6' className='pane'>
-                <div className='header'>User List</div>
-                <List
-                    size="small"
-                    bordered
-                    dataSource={data}
-                    renderItem={user => <List.Item onClick = {() => this.selectUser(user)}>
-                        <div>
-                            {user.name + ':' + user.age}
-                        </div>
-                    </List.Item>}
-                />
+                <div style={{ overflowX: 'scroll',overflowY:'scroll' }}>
+                        <svg width="960" height="500">
+                            <RaceBubble width={960} height={500} data={data}/>
+                        </svg>
+                </div>
             </div>
         )
     }

@@ -14,3 +14,24 @@
     margin-left: 30px;
     margin-top: 16px;
 }
+.date {
+    fill: rgb(230, 0, 0);
+    stroke-width: 2;
+    font-size: 30px;
+    line-height: normal;
+}
+
+.confirmed{
+    color: red;
+    stroke-width: 2;
+    font-size: 40px;
+    line-height: normal;
+    background: #fafafa;
+}
+
+.total{
+    color: red;
+    stroke-width: 2;
+    font-size: 30px;
+    line-height: normal;
+}

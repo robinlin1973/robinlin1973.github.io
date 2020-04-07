@@ -3,12 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.23.3",
-    "d3": "4.13.0",
+    "@vx/scale": "0.0.195",
+    "antd": "^4.0.4",
+    "d3": "5.15.0",
+    "d3-selection": "^1.4.1",
+    "d3-simple-slider": "^1.5.5",
+    "d3-svg-legend": "^2.25.6",
+    "d3-tip": "^0.9.1",
     "lodash": "^4.17.15",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1",
+    "topojson": "^3.0.2",
+    "topojson-client": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

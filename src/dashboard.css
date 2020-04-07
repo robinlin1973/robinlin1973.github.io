@@ -7,7 +7,7 @@
     margin-left: 5px;
     margin-right: 5px;
     border-radius: 5px;
-    /* box-shadow: 2px 2px 2px #dddddd; */
+     box-shadow: 2px 2px 2px #dddddd;
 }
 
 .header {
@@ -18,6 +18,62 @@
     border-radius: 5px;
     height: 30px;
 }
+
+#play{
+/*  float:left;*/
+  position:relative;
+  width: 53px;
+  height: 53px;
+  background-image: url("/play.png");
+  border-radius: 5px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+#play:hover{
+  background-position: 0 -53px;
+}
+
+#play.pause{
+  background-image: url("/pause.png");
+}
+#controlpanel{
+    margin: 40 0 0 0;
+}
+
+#yearplay{
+    z-index: 10;
+    position: absolute; /*newly added*/
+    left: 40px; /*newly added*/
+    top: 70px;/*newly added*/
+  width: 53px;
+  height: 53px;
+  background-image: url("/play.png");
+  border-radius: 5px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+#yearplay:hover{
+  background-position: 0 -53px;
+}
+
+#yearplay.pause{
+  background-image: url("/pause.png");
+}
+
+#yearslider{
+    z-index: 10;
+    position: absolute; /*newly added*/
+    left: 150px; /*newly added*/
+    top: 70px;/*newly added*/
+}
+#controlpanel {
+    z-index: 10;
+    position: absolute; /*newly added*/
+    left: 50px; /*newly added*/
+    top: 470px;/*newly added*/
+}
+
+
 
 
 
